@@ -25,6 +25,12 @@ module.exports = () => ({
         loader: 'babel-loader'
       },
       {
+        test: /\.js$/,
+        enforce: 'pre',
+        exclude: /node_modules/,
+        loader: 'eslint-loader'
+      },
+      {
         test: /\.html$/,
         loader: 'html-loader'
       },

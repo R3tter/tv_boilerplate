@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     transition: 'all .3s ease',
     cursor: 'pointer',
     ':hover': {
-      boxShadow:'2px 0px 32px 0 rgba(0,0,0,.2)'
+      boxShadow: '2px 0px 32px 0 rgba(0,0,0,.2)'
     }
   }
-})
+});
