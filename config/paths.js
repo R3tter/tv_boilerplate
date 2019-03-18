@@ -1,11 +1,17 @@
 const path = require('path');
 
-export const main = {
+const main = {
   src: path.resolve(__dirname, '../src/'),
   build: path.resolve(__dirname, '../.tmp/'),
   dist: path.resolve(__dirname, '../dist/'),
 }
 
-export const aliases = {
+const aliases = {
   config: path.resolve(__dirname, ''),
+  App: path.resolve(__dirname, '../src/features/App/components'),
 }
+
+module.exports = {
+  main,
+  aliases
+};

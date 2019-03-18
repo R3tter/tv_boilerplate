@@ -1,0 +1,41 @@
+@import '~normalize-scss/sass/normalize';
+@include normalize();
+
+@mixin margin-padding-reset() {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  @include margin-padding-reset;
+  font-family: 'Helvetica Neue', Helvetica;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  @include margin-padding-reset;
+}
+h1 {
+  font-size: 36px;
+  font-weight: 600;
+  color: black;
+}
+h2 {
+  font-size: 24px;
+  color: black;
+  font-weight: bold;
+}
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: black;
+}
+h5 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.43;
+}

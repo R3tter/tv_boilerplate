@@ -1,28 +1,35 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const { src, build } = require('./paths').main;
+const { src, dist } = require('./paths').main;
 
 const WebpackAliases = require('./paths').aliases;
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = () => ({
-  entry: {
-    src
-  },
+const extractSass = new MiniCssExtractPlugin({
+  filename: '[name].[hash:6].css'
+});
+
+
+const launchConfig = envs => ({
+  entry: src,
   output: {
     publicPath: '/',
-    path: build,
+    path: dist,
     filename: `bundle.[hash:6].js`
   },
-  devtool: 'cheap-module-source-map',
+  optimization: {
+    minimize: false,
+  },
+  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.html$/,
@@ -41,15 +48,22 @@ module.exports = () => ({
       {
         test: /\.scss$/,
         use: [
-          { loader: 'style-loader' },
-          'css-loader',
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              localIdentName: '[hash:base64:6]',
+            }
+          },
           {
             loader: 'sass-loader'
           }
         ]
       },
       {
-        test: /\.(eot|eot#iefix|ttf|woff|otf)$/,
+        test: /\.(eot|eot\#iefix|ttf|woff|otf)$/,
         use: {
           loader: 'file-loader',
           options: {
@@ -70,7 +84,7 @@ module.exports = () => ({
   },
   resolve: {
     alias: WebpackAliases,
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', 'jpg']
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -78,25 +92,19 @@ module.exports = () => ({
       favicon: path.join(src, 'favicon.ico'),
       template: path.join(src, 'index.ejs'),
       inject: 'body',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true
+      },
       hash: true,
-      version: require('../package.json').version
+      version: require('../package.json').version,
     }),
+    extractSass,
     new webpack.DefinePlugin({
-      DEV: JSON.stringify(true),
-      PROD: JSON.stringify(false)
+      DEV: JSON.stringify(false),
+      PROD: JSON.stringify(true)
     })
-  ],
-  devServer: {
-    contentBase: build,
-    port: 8080,
-    compress: false,
-    hot: true,
-    stats: 'errors-only',
-    open: false,
-    clientLogLevel: 'none',
-    historyApiFallback: {
-      disableDotRule: true
-    },
-    disableHostCheck: true
-  }
+  ]
 });
+
+module.exports = [launchConfig()];
