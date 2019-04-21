@@ -7,6 +7,17 @@ const WebpackAliases = require('./paths').aliases;
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const svgoPlugins = [
+  { removeTitle: true },
+  {
+    removeDesc: {
+      removeAny: true
+    }
+  },
+  { collapseGroups: true },
+  { removeStyleElement: true }
+];
+
 module.exports = () => ({
   entry: {
     src
@@ -36,10 +47,11 @@ module.exports = () => ({
       },
       {
         test: /\.(png|svg)$/,
+        exclude: WebpackAliases.icons,
         use: {
           loader: 'url-loader',
           options: {
-            limit: 1000,
+            limit: 20000,
             name: 'images/[name].[hash:6].[ext]'
           }
         }
@@ -50,7 +62,12 @@ module.exports = () => ({
           { loader: 'style-loader' },
           'css-loader',
           {
-            loader: 'sass-loader'
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: path.resolve(__dirname, './postcss.config.js')
+              }
+            }
           }
         ]
       },
@@ -71,6 +88,31 @@ module.exports = () => ({
             name: 'pdf/[name].[ext]'
           }
         }
+      },
+      {
+        test: /\.svg$/,
+        include: [WebpackAliases.icons],
+        use: [
+          'svg-sprite-loader',
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: svgoPlugins.concat(
+                {
+                  convertColors: {
+                    currentColor: true
+                  }
+                },
+                {
+                  cleanupIDs: {
+                    remove: true,
+                    minify: false
+                  }
+                }
+              )
+            }
+          }
+        ]
       }
     ]
   },
@@ -81,7 +123,7 @@ module.exports = () => ({
   plugins: [
     new HtmlWebpackPlugin({
       title: 'App title',
-      favicon: path.join(src, 'favicon.ico'),
+      // favicon: path.join(src, 'favicon.ico'),
       template: path.join(src, 'index.ejs'),
       inject: 'body',
       hash: true,

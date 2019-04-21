@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const { src, dist } = require('./paths').main;
+const { src, dist, icons } = require('./paths').main;
 
 const WebpackAliases = require('./paths').aliases;
 
@@ -12,6 +12,16 @@ const extractSass = new MiniCssExtractPlugin({
   filename: '[name].[hash:6].css'
 });
 
+const svgoPlugins = [
+  { removeTitle: true },
+  {
+    removeDesc: {
+      removeAny: true
+    }
+  },
+  { collapseGroups: true },
+  { removeStyleElement: true }
+];
 
 const launchConfig = envs => ({
   entry: src,
@@ -21,7 +31,7 @@ const launchConfig = envs => ({
     filename: `bundle.[hash:6].js`
   },
   optimization: {
-    minimize: false,
+    minimize: true
   },
   devtool: 'source-map',
   module: {
@@ -29,7 +39,7 @@ const launchConfig = envs => ({
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: 'babel-loader'
       },
       {
         test: /\.html$/,
@@ -54,11 +64,16 @@ const launchConfig = envs => ({
           {
             loader: 'css-loader',
             options: {
-              localIdentName: '[hash:base64:6]',
+              localIdentName: '[hash:base64:6]'
             }
           },
           {
-            loader: 'sass-loader'
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: path.resolve(__dirname, './postcss.config.js')
+              }
+            }
           }
         ]
       },
@@ -79,6 +94,31 @@ const launchConfig = envs => ({
             name: 'pdf/[name].[ext]'
           }
         }
+      },
+      {
+        test: /\.svg$/,
+        include: [icons],
+        use: [
+          'svg-sprite-loader',
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: svgoPlugins.concat(
+                {
+                  convertColors: {
+                    currentColor: true
+                  }
+                },
+                {
+                  cleanupIDs: {
+                    remove: true,
+                    minify: false
+                  }
+                }
+              )
+            }
+          }
+        ]
       }
     ]
   },
@@ -89,7 +129,7 @@ const launchConfig = envs => ({
   plugins: [
     new HtmlWebpackPlugin({
       title: 'App title',
-      favicon: path.join(src, 'favicon.ico'),
+      // favicon: path.join(src, 'favicon.ico'),
       template: path.join(src, 'index.ejs'),
       inject: 'body',
       minify: {
@@ -97,7 +137,7 @@ const launchConfig = envs => ({
         collapseWhitespace: true
       },
       hash: true,
-      version: require('../package.json').version,
+      version: require('../package.json').version
     }),
     extractSass,
     new webpack.DefinePlugin({

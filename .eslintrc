@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "plugins": ["react", "jest", "prettier"],
+  "plugins": ["react", "react-hooks", "jest", "prettier"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -8,7 +8,7 @@
     "prettier"
   ],
   "settings": {
-    "react" : {
+    "react": {
       "version": "detect"
     }
   },
@@ -37,6 +37,7 @@
       }
     ],
     "react/no-danger": "off",
+    "react/display-name": "off",
     "semi": ["warn", "always"],
     "space-before-blocks": ["warn", "always"],
     "spaced-comment": ["warn", "always"],
@@ -56,7 +57,9 @@
         "singleQuote": true,
         "parser": "typescript"
       }
-    ]
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error"
   },
   "env": {
     "browser": true,
