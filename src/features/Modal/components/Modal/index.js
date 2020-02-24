@@ -9,7 +9,6 @@ import { pink } from 'core/styles';
 import { Icon } from 'Common';
 import {
   selectActiveModals,
-  selectModalMessages,
   selectModalData
 } from 'Modal/selectors';
 import { modalRemove } from 'Modal/actions';
