@@ -1,11 +1,7 @@
 import { StyleSheet } from 'aphrodite/no-important';
 import {
   darkBlue,
-  white,
-  lightGreen,
-  lightBlue,
-  pink3,
-  yellow
+  white
 } from 'core/styles';
 
 export const wrapper = width =>

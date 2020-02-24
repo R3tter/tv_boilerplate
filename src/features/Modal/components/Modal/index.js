@@ -6,8 +6,7 @@ import { bindActionCreators } from 'redux';
 import PropsTypes from 'prop-types';
 
 import { pink } from 'core/styles';
-import { Icon, Figure } from 'Common';
-import { Button } from 'FormComponents';
+import { Icon } from 'Common';
 import {
   selectActiveModals,
   selectModalMessages,
@@ -48,20 +47,15 @@ const Modal = ({
 };
 
 Modal.propTypes = {
-  type: PropsTypes.oneOf(['default', 'notification', 'confirm']),
   activeModals: PropsTypes.array,
   modalRemove: PropsTypes.func,
   name: PropsTypes.string,
   width: PropsTypes.number,
-  messages: PropsTypes.object,
-  onClose: PropsTypes.func,
-  onConfirm: PropsTypes.func,
-  data: PropsTypes.object
+  onClose: PropsTypes.func
 };
 
 const mapStateToProps = state => ({
   activeModals: selectActiveModals(state),
-  messages: selectModalMessages(state),
   data: selectModalData(state)
 });
 const mapDispatchToProps = dispatch =>

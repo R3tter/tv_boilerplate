@@ -23,7 +23,7 @@ const svgoPlugins = [
   { removeStyleElement: true }
 ];
 
-const launchConfig = envs => ({
+const launchConfig = () => ({
   entry: src,
   output: {
     publicPath: '/',
