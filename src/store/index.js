@@ -27,6 +27,7 @@ const cachedMiddleware = store => next => action => {
 const appReducer = combineReducers(mergedReducers);
 const rootReducer = (state, action) => {
   if (action.type === 'RESET') {
+    // eslint-disable-next-line
     state = action.payload;
     // clear localStorage.
     clearState();
@@ -39,5 +40,5 @@ const store = createStore(
   loadState('your-storage'),
   composeWithDevTools(applyMiddleware(thunk, cachedMiddleware))
 );
-
+// eslint-disable-next-line
 export default store;

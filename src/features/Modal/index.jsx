@@ -1,32 +1,28 @@
 import React from 'react';
+import PropsTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { css } from 'aphrodite/no-important';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import PropsTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { pink } from 'core/styles';
-import { Icon } from 'Common';
 import {
-  selectActiveModals,
-  selectModalData
+  selectActiveModals
 } from 'Modal/selectors';
 import { modalRemove } from 'Modal/actions';
 
 import * as styles from './style';
 
-const Modal = ({
+export const Modal = ({
   children,
   name,
-  modalRemove,
-  activeModals,
   width,
   onClose = () => null
 }) => {
   const [t] = useTranslation('global');
+  const activeModals = useSelector(selectActiveModals);
+  const dispatch = useDispatch();
   const closeModal = () => {
     onClose();
-    modalRemove(name);
+    dispatch(modalRemove(name));
   };
 
   const show = activeModals.includes(name);
@@ -37,7 +33,7 @@ const Modal = ({
         className={css(styles.wrapper(width)._)}
       >
         <div className={css(styles.regular.icon)} onClick={closeModal}>
-          <Icon glyph="close" size={20} color={pink} />
+          close
         </div>
         <div className={css(styles.regular.default)}>{children}</div>
       </div>
@@ -52,17 +48,3 @@ Modal.propTypes = {
   width: PropsTypes.number,
   onClose: PropsTypes.func
 };
-
-const mapStateToProps = state => ({
-  activeModals: selectActiveModals(state),
-  data: selectModalData(state)
-});
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ modalRemove }, dispatch);
-
-const ModalConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Modal);
-
-export { ModalConnect as Modal };

@@ -28,7 +28,7 @@ const launchConfig = () => ({
   output: {
     publicPath: '/',
     path: dist,
-    filename: `bundle.[hash:6].js`
+    filename: 'bundle.[hash:6].js'
   },
   optimization: {
     minimize: true
@@ -37,7 +37,7 @@ const launchConfig = () => ({
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
       },

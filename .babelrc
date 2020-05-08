@@ -12,5 +12,20 @@
       }
     ],
     "@babel/react"
+  ],
+  "plugins": [
+    ["module-resolver", {
+      "alias": {
+        "core": "./src/core/",
+        "config": "./config/",
+        "icons": "./src/images/icons/",
+        "images": "./src/images/",
+        "store": "./src/store/",
+        "App": "./src/features/App/",
+        "Common": "./src/features/Common/",
+        "FormComponents": "./src/features/FormComponents/",
+        "Modal": "./src/features/Modal/"
+      }
+    }]
   ]
 }

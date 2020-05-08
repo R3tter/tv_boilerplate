@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect'; 
+import { createSelector } from 'reselect';
 
 const modal = state => state.Modal;
 export const selectActiveModals = createSelector(

@@ -25,18 +25,18 @@ module.exports = () => ({
   output: {
     publicPath: '/',
     path: build,
-    filename: `bundle.[hash:6].js`
+    filename: 'bundle.[hash:6].js'
   },
   devtool: 'cheap-module-source-map',
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         enforce: 'pre',
         exclude: /node_modules/,
         loader: 'eslint-loader'
@@ -126,12 +126,12 @@ module.exports = () => ({
       // favicon: path.join(src, 'favicon.ico'),
       template: path.join(src, 'index.ejs'),
       inject: 'body',
-      hash: true,
-      version: require('../package.json').version
+      hash: true
     }),
     new webpack.DefinePlugin({
       DEV: JSON.stringify(true),
-      PROD: JSON.stringify(false)
+      PROD: JSON.stringify(false),
+      VERSION: JSON.stringify(require('../package.json').version)
     })
   ],
   devServer: {
