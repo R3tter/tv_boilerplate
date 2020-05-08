@@ -62,15 +62,7 @@ const launchConfig = () => ({
           {
             loader: MiniCssExtractPlugin.loader
           },
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: {
-                path: path.resolve(__dirname, './postcss.config.js')
-              }
-            }
-          }
+          'css-loader'
         ]
       },
       {
