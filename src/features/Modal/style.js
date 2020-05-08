@@ -1,8 +1,4 @@
 import { StyleSheet } from 'aphrodite/no-important';
-import {
-  darkBlue,
-  white
-} from 'core/styles';
 
 export const wrapper = width =>
   StyleSheet.create({
@@ -13,7 +9,7 @@ export const wrapper = width =>
       boxSizing: 'border-box',
       borderRadius: '5px',
       boxShadow: '5px 8px 40px 0 rgba(0,0,0, 0.12)',
-      background: white
+      background: 'white'
     }
   });
 
@@ -27,12 +23,15 @@ export const regular = StyleSheet.create({
     left: '0',
     width: '100%',
     height: '100vh',
-    zIndex: '20'
+    zIndex: '20',
+    background: 'rgba(0,0,0, 0.2)',
   },
   icon: {
     position: 'absolute',
-    top: '5px',
-    right: '5px',
+    width: '15px',
+    height: '15px',
+    top: '10px',
+    right: '10px',
     cursor: 'pointer'
   },
   default: {
@@ -45,6 +44,6 @@ export const regular = StyleSheet.create({
   text: {
     fontSize: '16px',
     textAlign: 'center',
-    color: darkBlue
+    color: 'black'
   }
 });

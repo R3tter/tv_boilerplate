@@ -12,7 +12,7 @@ import './index.scss';
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <App>Hello fkc world</App>
+      <App />
     </Router>
   </Provider>,
   document.getElementById('app')

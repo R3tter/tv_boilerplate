@@ -47,10 +47,11 @@ const launchConfig = () => ({
       },
       {
         test: /\.(png|svg)$/,
+        exclude: WebpackAliases.icons,
         use: {
           loader: 'url-loader',
           options: {
-            limit: 1000,
+            limit: 20000,
             name: 'images/[name].[hash:6].[ext]'
           }
         }
@@ -61,12 +62,7 @@ const launchConfig = () => ({
           {
             loader: MiniCssExtractPlugin.loader
           },
-          {
-            loader: 'css-loader',
-            options: {
-              localIdentName: '[hash:base64:6]'
-            }
-          },
+          'css-loader',
           {
             loader: 'postcss-loader',
             options: {
@@ -97,28 +93,8 @@ const launchConfig = () => ({
       },
       {
         test: /\.svg$/,
-        include: [icons],
-        use: [
-          'svg-sprite-loader',
-          {
-            loader: 'svgo-loader',
-            options: {
-              plugins: svgoPlugins.concat(
-                {
-                  convertColors: {
-                    currentColor: true
-                  }
-                },
-                {
-                  cleanupIDs: {
-                    remove: true,
-                    minify: false
-                  }
-                }
-              )
-            }
-          }
-        ]
+        include: [WebpackAliases.icons],
+        use: ['@svgr/webpack']
       }
     ]
   },
@@ -142,7 +118,8 @@ const launchConfig = () => ({
     extractSass,
     new webpack.DefinePlugin({
       DEV: JSON.stringify(false),
-      PROD: JSON.stringify(true)
+      PROD: JSON.stringify(true),
+      VERSION: JSON.stringify(require('../package.json').version)
     })
   ]
 });

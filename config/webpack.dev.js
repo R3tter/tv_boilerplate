@@ -92,27 +92,7 @@ module.exports = () => ({
       {
         test: /\.svg$/,
         include: [WebpackAliases.icons],
-        use: [
-          'svg-sprite-loader',
-          {
-            loader: 'svgo-loader',
-            options: {
-              plugins: svgoPlugins.concat(
-                {
-                  convertColors: {
-                    currentColor: true
-                  }
-                },
-                {
-                  cleanupIDs: {
-                    remove: true,
-                    minify: false
-                  }
-                }
-              )
-            }
-          }
-        ]
+        use: ['@svgr/webpack']
       }
     ]
   },

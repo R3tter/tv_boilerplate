@@ -12,7 +12,9 @@
       "Common": ["features/Common"],
       "FormComponents": ["features/FormComponents"],
       "Modal": ["features/Modal"],
-      "Modal/*": ["features/Modal/*"]
+      "Modal/*": ["features/Modal/*"],
+      "images/*": ["images/*"],
+      "images/icons/*": ["images/icons/*"]
     }
   },
   "exclude": ["node_modules", "dist"]
