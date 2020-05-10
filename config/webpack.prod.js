@@ -12,17 +12,6 @@ const extractSass = new MiniCssExtractPlugin({
   filename: '[name].[hash:6].css'
 });
 
-const svgoPlugins = [
-  { removeTitle: true },
-  {
-    removeDesc: {
-      removeAny: true
-    }
-  },
-  { collapseGroups: true },
-  { removeStyleElement: true }
-];
-
 const launchConfig = () => ({
   entry: src,
   output: {
@@ -47,7 +36,7 @@ const launchConfig = () => ({
       },
       {
         test: /\.(png|svg)$/,
-        exclude: WebpackAliases.icons,
+        exclude: icons,
         use: {
           loader: 'url-loader',
           options: {
@@ -85,7 +74,7 @@ const launchConfig = () => ({
       },
       {
         test: /\.svg$/,
-        include: [WebpackAliases.icons],
+        include: [icons],
         use: ['@svgr/webpack']
       }
     ]

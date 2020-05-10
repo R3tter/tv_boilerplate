@@ -7,17 +7,6 @@ const WebpackAliases = require('./paths').aliases;
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const svgoPlugins = [
-  { removeTitle: true },
-  {
-    removeDesc: {
-      removeAny: true
-    }
-  },
-  { collapseGroups: true },
-  { removeStyleElement: true }
-];
-
 module.exports = () => ({
   entry: {
     src
