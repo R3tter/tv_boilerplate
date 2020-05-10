@@ -9,6 +9,7 @@ const main = {
 
 const aliases = {
   core: path.resolve(__dirname, '../src/core/'),
+  constants: path.resolve(__dirname, '../src/constants/'),
   config: path.resolve(__dirname, ''),
   icons: path.resolve(__dirname, '../src/images/icons/'),
   images: path.resolve(__dirname, '../src/images/'),

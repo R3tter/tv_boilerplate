@@ -1,3 +1,5 @@
+import { LOCAL_STORAGE_NAME } from 'constants/index.js';
+
 export const loadState = key => {
   try {
     const serializedState = localStorage.getItem(key);
@@ -19,6 +21,6 @@ const saveToStorage = (key, value) => {
   }
 };
 
-export const saveState = ({ Cached }) => saveToStorage('your-storage', Cached);
+export const saveState = ({ Cached }) => saveToStorage(LOCAL_STORAGE_NAME, Cached);
 
-export const clearState = () => saveToStorage('your-storage', undefined);
+export const clearState = () => saveToStorage(LOCAL_STORAGE_NAME, undefined);

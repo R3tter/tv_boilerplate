@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 import { ModalReducers as Modal } from 'Modal/reducers';
 import { Cached } from 'App/reducers/cached';
+import { LOCAL_STORAGE_NAME } from 'constants/index.js';
 
 import { loadState, saveState, clearState } from './localStorage';
 
@@ -37,7 +38,7 @@ const rootReducer = (state, action) => {
 const store = createStore(
   rootReducer,
   // get Cached from localStorage
-  loadState('your-storage'),
+  loadState(LOCAL_STORAGE_NAME),
   composeWithDevTools(applyMiddleware(thunk, cachedMiddleware))
 );
 // eslint-disable-next-line
