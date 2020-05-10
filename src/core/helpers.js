@@ -1,7 +1,23 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-// !!! store тут нужен, без него не работает кеширование (логин вообще не пашет). Почему? Хороший вопрос ) !!!
+// !!! store тут нужен, без него не работает кеширование
 import store from 'store'; // eslint-disable-line
+
+// Example of routes root arr
+/*export const routes = [
+  {
+    path: '/auth',
+    component: Auth,
+    exact: false,
+    pageCategory: 'auth'
+  },
+  {
+    path: '/cabinet',
+    component: Cabinet,
+    exact: false,
+    pageCategory: 'private'
+  }
+];*/
 
 export const routesMapper = (routes, isAuth = false) =>
   routes.map((route, i) => {
@@ -29,3 +45,4 @@ export const generateEventObj = (name, value) => ({
     value
   }
 });
+
