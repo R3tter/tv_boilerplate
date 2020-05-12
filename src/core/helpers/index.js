@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 // !!! store тут нужен, без него не работает кеширование
-import store from 'store'; // eslint-disable-line
+import store from 'store/index'; // eslint-disable-line
 
 // Example of routes root arr
 /*export const routes = [

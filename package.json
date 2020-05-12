@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "dev": "webpack-dev-server --mode development --config ./config/webpack.dev.js",
     "prod": "rm -rf ./dist/* && webpack --mode production --display-error-details --config ./config/webpack.prod.js"
   },
@@ -17,15 +18,27 @@
   "bugs": {
     "url": "https://gitlab.com/R3tter/webpack_boilerplate/issues"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.(ts|js)$": "babel-jest"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ]
+  },
   "homepage": "https://gitlab.com/R3tter/webpack_boilerplate#readme",
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
     "@svgr/webpack": "^5.4.0",
+    "@testing-library/react": "^10.0.4",
+    "@testing-library/react-hooks": "^3.2.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "css-loader": "^3.5.3",
@@ -41,6 +54,7 @@
     "file-loader": "^6.0.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.0.1",
     "mini-css-extract-plugin": "^0.9.0",
     "precss": "^4.0.0",
     "prettier": "^2.0.5",
