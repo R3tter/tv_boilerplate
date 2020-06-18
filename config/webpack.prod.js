@@ -12,7 +12,7 @@ const extractSass = new MiniCssExtractPlugin({
   filename: '[name].[hash:6].css'
 });
 
-const launchConfig = () => ({
+module.exports = env => ({
   entry: src,
   output: {
     publicPath: '/',
@@ -104,5 +104,3 @@ const launchConfig = () => ({
     })
   ]
 });
-
-module.exports = [launchConfig()];

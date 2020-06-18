@@ -7,7 +7,7 @@ const WebpackAliases = require('./paths').aliases;
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = () => ({
+module.exports = env => ({
   entry: {
     src
   },
