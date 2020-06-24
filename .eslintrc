@@ -45,7 +45,8 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "react/button-has-type": "off",
     "jsx-a11y/no-static-element-interactions": "off",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "jsx-a11y/no-noninteractive-tabindex": "off"
   },
   "extends": ["eslint:recommended", "plugin:react/recommended", "eslint-config-airbnb"]
 }

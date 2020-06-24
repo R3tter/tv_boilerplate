@@ -6,9 +6,8 @@
   "scripts": {
     "test": "jest",
     "dev": "webpack-dev-server --mode development --config ./config/webpack.dev.js",
-    "dev:webOS": "webpack-dev-server --mode development --env.platform=webOS --config ./config/webpack.dev.js",
-    "dev:tizen": "webpack-dev-server --mode development --env.platform=tizen --config ./config/webpack.dev.js",
-    "prod": "rm -rf ./dist/* && webpack --mode production --display-error-details --config ./config/webpack.prod.js"
+    "prod": "rm -rf ./dist/* && webpack --mode production --display-error-details --config ./config/webpack.prod.js",
+    "prod:webOS": "rm -rf ./dist/* && webpack --mode production --env.platform=webOS --display-error-details --config ./config/webpack.prod.js"
   },
   "repository": {
     "type": "git",

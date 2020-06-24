@@ -16,7 +16,6 @@ export const styles = StyleSheet.create({
     width: '500px',
     height: '500px',
     boxShadow: '1px 0px 16px 0 rgba(0,0,0,.1)',
-    transition: 'all .3s ease',
     cursor: 'pointer',
     ':hover': {
       boxShadow: '2px 0px 32px 0 rgba(0,0,0,.2)'

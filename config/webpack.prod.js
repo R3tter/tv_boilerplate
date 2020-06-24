@@ -15,7 +15,7 @@ const extractSass = new MiniCssExtractPlugin({
 module.exports = (env) => ({
   entry: src,
   output: {
-    publicPath: '/',
+    publicPath: env?.platform ? '' : '/',
     path: dist,
     filename: 'bundle.[hash:6].js'
   },
@@ -107,7 +107,7 @@ module.exports = (env) => ({
           new CopyPlugin({
             patterns: [
               {
-                from: `./${env?.platform}`,
+                from: path.join(__dirname, `./${env?.platform}`),
                 to: dist
               }
             ]
