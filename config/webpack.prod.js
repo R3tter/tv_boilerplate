@@ -1,18 +1,18 @@
 const path = require('path');
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { src, dist, icons } = require('./paths').main;
 
 const WebpackAliases = require('./paths').aliases;
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 const extractSass = new MiniCssExtractPlugin({
   filename: '[name].[hash:6].css'
 });
 
-module.exports = env => ({
+module.exports = (env) => ({
   entry: src,
   output: {
     publicPath: '/',
@@ -101,6 +101,18 @@ module.exports = env => ({
       DEV: JSON.stringify(false),
       PROD: JSON.stringify(true),
       VERSION: JSON.stringify(require('../package.json').version)
-    })
+    }),
+    ...(env?.platform
+      ? [
+          new CopyPlugin({
+            patterns: [
+              {
+                from: `./${env?.platform}`,
+                to: dist
+              }
+            ]
+          })
+        ]
+      : [])
   ]
 });

@@ -6,6 +6,8 @@
   "scripts": {
     "test": "jest",
     "dev": "webpack-dev-server --mode development --config ./config/webpack.dev.js",
+    "dev:webOS": "webpack-dev-server --mode development --env.platform=webOS --config ./config/webpack.dev.js",
+    "dev:tizen": "webpack-dev-server --mode development --env.platform=tizen --config ./config/webpack.dev.js",
     "prod": "rm -rf ./dist/* && webpack --mode production --display-error-details --config ./config/webpack.prod.js"
   },
   "repository": {
@@ -42,6 +44,7 @@
     "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-module-resolver": "^4.0.0",
+    "copy-webpack-plugin": "^6.0.2",
     "css-loader": "^3.5.3",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
