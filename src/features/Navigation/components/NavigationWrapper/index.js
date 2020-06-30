@@ -6,6 +6,7 @@ import { navigationTypes, NavigationContext, navigationKeys, navigationModificat
 
 export const NavigationWrapper = memo(({ children, navigations }) => {
   const { activeNavigationName, setActiveNavigation } = useContext(NavigationContext);
+
   const columnIndex = useMemo(() => navigations.findIndex((arr) => arr.includes(activeNavigationName)), [
     activeNavigationName
   ]);
@@ -13,6 +14,7 @@ export const NavigationWrapper = memo(({ children, navigations }) => {
     columnIndex,
     activeNavigationName
   ]);
+
   const handleKeyPress = (e) => {
     const { key } = e;
     const type = Object.entries(navigationKeys).find(([, arr]) => arr.includes(key))[0];
@@ -20,13 +22,15 @@ export const NavigationWrapper = memo(({ children, navigations }) => {
       case navigationTypes.vertical: {
         const newIndex = columnIndex + navigationModificators[key];
         const isValid = newIndex >= 0 && newIndex < navigations.length;
-        isValid && setActiveNavigation(navigations[newIndex][0]);
+        const navigationName = isValid && navigations[newIndex][rowIndex];
+        navigationName && setActiveNavigation(navigations[newIndex][rowIndex]);
         break;
       }
       case navigationTypes.horizontal: {
         const newIndex = rowIndex + navigationModificators[key];
         const isValid = newIndex >= 0 && newIndex < navigations[columnIndex].length;
-        isValid && setActiveNavigation(navigations[columnIndex][newIndex]);
+        const navigationName = isValid && navigations[columnIndex][newIndex];
+        navigationName && setActiveNavigation(navigations[columnIndex][newIndex]);
         break;
       }
     }

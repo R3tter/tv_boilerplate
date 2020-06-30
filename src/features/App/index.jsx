@@ -13,16 +13,23 @@ export const App = () => {
   useEffect(() => {
     // eslint-disable-next-line
     console.log(`%c current version is: ${VERSION}`, 'color: orange; font-size: 13px;');
-    setActiveNavigation(navigationNames.second);
+    setActiveNavigation(navigationNames.first);
   }, []);
 
   return (
     <div className={css(styles.regular.app)}>
       <NavigationContext.Provider value={{ activeNavigationName, setActiveNavigation }}>
-        <NavigationWrapper navigations={[[navigationNames.first], [navigationNames.second, navigationNames.asdsd]]}>
-          <Navigation name={navigationNames.first} type={navigationTypes.horizontal}>
-            {[<span>1</span>, <span>2</span>, <span>3</span>, <span>4</span>]}
-          </Navigation>
+        <NavigationWrapper
+          navigations={[
+            ['', navigationNames.first],
+            [navigationNames.second, navigationNames.asdsd]
+          ]}
+        >
+          <div style={{ display: 'flex' }}>
+            <Navigation name={navigationNames.first} type={navigationTypes.horizontal}>
+              {[<span>1</span>, <span>2</span>, <span>3</span>, <span>4</span>]}
+            </Navigation>
+          </div>
           <div style={{ display: 'flex' }}>
             <Navigation name={navigationNames.second} type={navigationTypes.vertical}>
               {[<span>1</span>, <span>2</span>, <span>3</span>, <span>4</span>]}
