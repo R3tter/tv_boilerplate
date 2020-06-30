@@ -25,7 +25,7 @@
         "Common": "./src/features/Common/",
         "FormComponents": "./src/features/FormComponents/",
         "Modal": "./src/features/Modal/",
-        "utils": "./src/features/utils/",
+        "Navigation": "./src/features/Navigation/",
         "constants": "./src/constants/"
       }
     }]

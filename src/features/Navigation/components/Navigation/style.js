@@ -1,5 +1,7 @@
 import { StyleSheet } from 'aphrodite/no-important';
 
+import { navigationTypes } from 'Navigation/constants';
+
 export const regular = StyleSheet.create({
   root: {
     display: 'flex',
@@ -25,3 +27,12 @@ export const regular = StyleSheet.create({
     }
   }
 });
+
+export const root = (type) =>
+  StyleSheet.create({
+    _: {
+      display: 'flex',
+      outline: 'none',
+      ...(navigationTypes.vertical === type ? { flexDirection: 'column' } : {})
+    }
+  });

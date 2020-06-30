@@ -46,3 +46,8 @@ export const generateEventObj = (name, value) => ({
     value
   }
 });
+
+export const setFocus = (navigationName, itemId) => {
+  const selector = itemId !== undefined ? `${navigationName}-${itemId}` : navigationName;
+  document.querySelector(`[data-focus-id="navigation-${selector}"]`)?.focus();
+};
