@@ -3,9 +3,7 @@ const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const { src, build } = require('./paths').main;
-
-const WebpackAliases = require('./paths').aliases;
+const { src, build, icons } = require('./paths').main;
 
 module.exports = (env) => ({
   entry: {
@@ -36,7 +34,7 @@ module.exports = (env) => ({
       },
       {
         test: /\.(png|svg)$/,
-        exclude: WebpackAliases.icons,
+        exclude: icons,
         use: {
           loader: 'url-loader',
           options: {
@@ -69,13 +67,12 @@ module.exports = (env) => ({
       },
       {
         test: /\.svg$/,
-        include: [WebpackAliases.icons],
+        include: [icons],
         use: ['@svgr/webpack']
       }
     ]
   },
   resolve: {
-    alias: WebpackAliases,
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', 'jpg']
   },
   plugins: [

@@ -1,25 +1,22 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { css } from 'aphrodite/no-important';
-import { useDispatch } from 'react-redux';
 
-import { Modal } from 'Modal';
-import { modalAdd } from 'Modal/actions';
+import { Navigation } from 'Common';
+import { navigationTypes } from 'constants/index.js';
 
-import { styles } from './style';
+import * as styles from './style';
 
 export const App = () => {
   useEffect(() => {
     // eslint-disable-next-line
     console.log(`%c current version is: ${VERSION}`, 'color: orange; font-size: 13px;');
   }, []);
-  const dispatch = useDispatch();
-  const addModal = useCallback(() => dispatch(modalAdd('test')), []);
+
   return (
-    <div className={css(styles.app)}>
-      <div className={css(styles.wrapper)} onClick={addModal}>
-        Click me
-      </div>
-      <Modal name="test">Some text here</Modal>
+    <div className={css(styles.regular.app)}>
+      <Navigation name="test" type={navigationTypes.horizontal} isRoot>
+        {[<span>1</span>, <span>2</span>, <span>3</span>, <span>4</span>]}
+      </Navigation>
     </div>
   );
 };

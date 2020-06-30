@@ -9,4 +9,4 @@ test('Test generateEventObj', () => {
       value: 'Ivan'
     }
   });
-})
+});

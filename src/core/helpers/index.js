@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 // !!! store тут нужен, без него не работает кеширование
-import store from 'store/index'; // eslint-disable-line
+// eslint-disable-line
+import store from 'store/index';
 
 // Example of routes root arr
 /*export const routes = [
@@ -25,16 +26,16 @@ export const routesMapper = (routes, isAuth = false) =>
 
     switch (pageCategory) {
       case 'private':
-        return !isAuth ? <Route key={i} path={path} render={() => <Redirect to="/auth" />} /> : <Route key={i} {...route} component={route.component} />;
+        return !isAuth ? (
+          <Route key={i} path={path} render={() => <Redirect to="/auth" />} />
+        ) : (
+          <Route key={i} {...route} component={route.component} />
+        );
       case 'auth':
         return !isAuth ? (
           <Route key={i} {...route} component={route.component} />
         ) : (
-          <Route
-            key={i}
-            path={path}
-            render={() => <Redirect to="/cabinet" />}
-          />
+          <Route key={i} path={path} render={() => <Redirect to="/cabinet" />} />
         );
     }
   });
@@ -45,4 +46,3 @@ export const generateEventObj = (name, value) => ({
     value
   }
 });
-
