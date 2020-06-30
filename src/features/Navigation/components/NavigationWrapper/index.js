@@ -17,7 +17,7 @@ export const NavigationWrapper = memo(({ children, navigations }) => {
 
   const handleKeyPress = (e) => {
     const { key } = e;
-    const type = Object.entries(navigationKeys).find(([, arr]) => arr.includes(key))[0];
+    const [type] = Object.entries(navigationKeys).find(([, arr]) => arr.includes(key)) || [];
     switch (type) {
       case navigationTypes.vertical: {
         const newIndex = columnIndex + navigationModificators[key];
