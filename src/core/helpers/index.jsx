@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 // !!! store тут нужен, без него не работает кеширование
-// eslint-disable-line
+// eslint-disable-next-line
 import store from 'store/index';
 
 // Example of routes root arr
-/*export const routes = [
+/* export const routes = [
   {
     path: '/auth',
     component: Auth,
@@ -18,7 +18,7 @@ import store from 'store/index';
     exact: false,
     pageCategory: 'private'
   }
-];*/
+]; */
 
 export const routesMapper = (routes, isAuth = false) =>
   routes.map((route, i) => {
@@ -38,6 +38,7 @@ export const routesMapper = (routes, isAuth = false) =>
           <Route key={i} path={path} render={() => <Redirect to="/cabinet" />} />
         );
     }
+    return null;
   });
 
 export const generateEventObj = (name, value) => ({

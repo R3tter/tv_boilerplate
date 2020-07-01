@@ -43,5 +43,6 @@ export const Navigation = memo(({ name, type, children }) => {
 
 Navigation.propTypes = {
   name: PropsTypes.string.isRequired,
-  type: PropsTypes.oneOf([navigationTypes.horizontal, navigationTypes.vertical]).isRequired
+  type: PropsTypes.oneOf([navigationTypes.horizontal, navigationTypes.vertical]).isRequired,
+  children: PropsTypes.arrayOf(PropsTypes.node)
 };

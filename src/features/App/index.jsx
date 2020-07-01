@@ -1,9 +1,8 @@
-import React, { useEffect, createContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { css } from 'aphrodite/no-important';
 
 import { Navigation, NavigationWrapper } from 'Navigation';
-import { NavigationContext } from 'Navigation/constants';
-import { navigationTypes, navigationNames } from 'Navigation/constants';
+import { NavigationContext, navigationTypes, navigationNames } from 'Navigation/constants';
 
 import * as styles from './style';
 

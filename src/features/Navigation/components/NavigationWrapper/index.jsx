@@ -1,6 +1,5 @@
 import React, { memo, useContext, useMemo } from 'react';
 import PropsTypes from 'prop-types';
-import { css } from 'aphrodite/no-important';
 
 import { navigationTypes, NavigationContext, navigationKeys, navigationModificators } from 'Navigation/constants';
 
@@ -38,3 +37,8 @@ export const NavigationWrapper = memo(({ children, navigations }) => {
 
   return <div onKeyDown={handleKeyPress}>{children}</div>;
 });
+
+NavigationWrapper.propTypes = {
+  navigations: PropsTypes.array.isRequired,
+  children: PropsTypes.node
+};
