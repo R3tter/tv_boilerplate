@@ -9,7 +9,7 @@ import * as styles from './style';
 
 export const Navigation = memo(({ name, type, children }) => {
   const [active, setActive] = useState(0);
-  const { activeNavigationName } = useContext(NavigationContext);
+  const { activeNavigationName, setActiveNavigation } = useContext(NavigationContext);
 
   const handleKeyPress = (e) => {
     const { key } = e;
@@ -19,6 +19,11 @@ export const Navigation = memo(({ name, type, children }) => {
       isInside && setActive(newActive);
       isInside && e.stopPropagation();
     }
+  };
+
+  const handleClick = (index) => {
+    setActive(index);
+    activeNavigationName !== name && setActiveNavigation(name);
   };
 
   useEffect(() => {
@@ -32,6 +37,7 @@ export const Navigation = memo(({ name, type, children }) => {
           tabIndex={0}
           data-focus-id={`navigation-${name}-${index}`}
           key={index}
+          onClick={() => handleClick(index)}
           className={css(styles.regular.item)}
         >
           {item}
