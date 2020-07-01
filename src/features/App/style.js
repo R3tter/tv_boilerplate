@@ -1,6 +1,6 @@
 import { StyleSheet } from 'aphrodite/no-important';
 
-export const styles = StyleSheet.create({
+export const regular = StyleSheet.create({
   app: {
     width: '100%',
     height: '100vh',

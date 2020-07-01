@@ -6,8 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { src, dist, icons } = require('./paths').main;
 
-const WebpackAliases = require('./paths').aliases;
-
 const extractSass = new MiniCssExtractPlugin({
   filename: '[name].[hash:6].css'
 });
@@ -80,7 +78,6 @@ module.exports = (env) => ({
     ]
   },
   resolve: {
-    alias: WebpackAliases,
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
   },
   plugins: [

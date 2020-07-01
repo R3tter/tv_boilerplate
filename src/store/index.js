@@ -14,7 +14,7 @@ const mergedReducers = {
 };
 
 // update localStorage
-const cachedMiddleware = store => next => action => {
+const cachedMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case 'SET_CACHED_DATA':
       next(action);

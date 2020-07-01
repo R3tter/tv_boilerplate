@@ -1,6 +1,6 @@
 import { LOCAL_STORAGE_NAME } from 'constants/index.js';
 
-export const loadState = key => {
+export const loadState = (key) => {
   try {
     const serializedState = localStorage.getItem(key);
     if (serializedState === null) {

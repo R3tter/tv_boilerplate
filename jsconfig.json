@@ -14,8 +14,10 @@
       "Modal": ["features/Modal"],
       "constants": ["constants"],
       "Modal/*": ["features/Modal/*"],
+      "Navigation/*": ["features/Navigation/*"],
+      "Navigation": ["features/Navigation"],
       "images/*": ["images/*"],
-      "images/icons/*": ["images/icons/*"],
+      "images/icons/*": ["images/icons/*"]
     }
   },
   "exclude": ["node_modules", "dist"]
