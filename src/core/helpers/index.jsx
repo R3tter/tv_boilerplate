@@ -52,3 +52,9 @@ export const setFocus = (navigationName, itemId) => {
   const selector = itemId !== undefined ? `${navigationName}-${itemId}` : navigationName;
   document.querySelector(`[data-focus-id="navigation-${selector}"]`)?.focus();
 };
+
+export const chunk = (arr, length) =>
+  arr.reduce((a, b, index) => {
+    const slicedArr = arr.slice(index * length, index * length + length);
+    return slicedArr.length ? [...a, slicedArr] : a;
+  }, []);

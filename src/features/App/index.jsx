@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { css } from 'aphrodite/no-important';
 
 import { Navigation, NavigationWrapper } from 'Navigation';
-import { NavigationContext, navigationTypes, navigationNames } from 'Navigation/constants';
-
-import * as styles from './style';
+import { NavigationContext, navigationNames } from 'Navigation/constants';
 
 export const App = () => {
   const [activeNavigationName, setActiveNavigation] = useState(null);
@@ -16,29 +13,62 @@ export const App = () => {
   }, []);
 
   return (
-    <div className={css(styles.regular.app)}>
-      <NavigationContext.Provider value={{ activeNavigationName, setActiveNavigation }}>
-        <NavigationWrapper
-          navigations={[
-            ['', navigationNames.first],
-            [navigationNames.second, navigationNames.asdsd]
-          ]}
-        >
-          <div style={{ display: 'flex' }}>
-            <Navigation name={navigationNames.first} type={navigationTypes.horizontal}>
-              {[<span>1</span>, <span>2</span>, <span>3</span>, <span>4</span>]}
-            </Navigation>
-          </div>
-          <div style={{ display: 'flex' }}>
-            <Navigation name={navigationNames.second} type={navigationTypes.vertical}>
-              {[<span>1</span>, <span>2</span>, <span>3</span>, <span>4</span>]}
-            </Navigation>
-            <Navigation name={navigationNames.asdsd} type={navigationTypes.vertical}>
-              {[<span>1</span>, <span>2</span>, <span>3</span>, <span>4</span>]}
-            </Navigation>
-          </div>
-        </NavigationWrapper>
-      </NavigationContext.Provider>
-    </div>
+    <NavigationContext.Provider value={{ activeNavigationName, setActiveNavigation }}>
+      <NavigationWrapper navigations={[[navigationNames.first], [navigationNames.second]]}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <Navigation
+            name={navigationNames.first}
+            customStyles={{
+              root: {
+                width: '100%',
+                marginTop: '25px',
+                gridGap: '25px'
+              },
+              item: {
+                width: '150px',
+                height: '50px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                background: 'red',
+                marginLeft: '25px',
+                ':focus': {
+                  background: 'green'
+                }
+              }
+            }}
+          >
+            {Array(4)
+              .fill(null)
+              .map((_, index) => (
+                <span>{index}</span>
+              ))}
+          </Navigation>
+          <Navigation
+            name={navigationNames.second}
+            columnsCount={3}
+            customStyles={{
+              root: {
+                width: '100%',
+                marginTop: '25px',
+                gridGap: '25px'
+              },
+              item: {
+                height: '50px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }
+            }}
+          >
+            {Array(16)
+              .fill(null)
+              .map((_, index) => (
+                <span>{index}</span>
+              ))}
+          </Navigation>
+        </div>
+      </NavigationWrapper>
+    </NavigationContext.Provider>
   );
 };
