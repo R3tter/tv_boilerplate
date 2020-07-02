@@ -22,14 +22,14 @@ export const NavigationWrapper = memo(({ children, navigations }) => {
         const newIndex = rowIndex + navigationModificators[key];
         const isValid = newIndex >= 0 && newIndex < navigations.length;
         const navigationName = isValid && navigations[newIndex][columnIndex];
-        navigationName && setActiveNavigation(navigations[newIndex][columnIndex]);
+        navigationName && setActiveNavigation(navigationName);
         break;
       }
       case navigationTypes.horizontal: {
         const newIndex = columnIndex + navigationModificators[key];
         const isValid = newIndex >= 0 && newIndex < navigations[rowIndex].length;
         const navigationName = isValid && navigations[rowIndex][newIndex];
-        navigationName && setActiveNavigation(navigations[rowIndex][newIndex]);
+        navigationName && setActiveNavigation(navigationName);
         break;
       }
     }
