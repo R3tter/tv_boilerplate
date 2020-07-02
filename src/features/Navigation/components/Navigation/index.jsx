@@ -1,42 +1,24 @@
-import React, { memo, useEffect, useState, useContext } from 'react';
+import React, { memo, useEffect, useState, useContext, useMemo } from 'react';
 import PropsTypes from 'prop-types';
 import { css } from 'aphrodite/no-important';
 
 import { navigationKeys, navigationModificators, NavigationContext, navigationTypes } from 'Navigation/constants';
-import { setFocus } from 'core/helpers';
+import { setFocus, chunk } from 'core/helpers';
 
 import * as styles from './style';
 
-export const Navigation = memo(({ name, type, children, customStyles }) => {
+export const Navigation = memo(({ name, chunkLength, children, customStyles }) => {
   const [active, setActive] = useState(0);
   const { activeNavigationName, setActiveNavigation } = useContext(NavigationContext);
-
-  const handleKeyPress = (e) => {
-    const { key } = e;
-    if (navigationKeys[type].includes(key)) {
-      const newActive = active + navigationModificators[key];
-      const isInside = newActive >= 0 && newActive < children.length;
-      isInside && setActive(newActive);
-      isInside && e.stopPropagation();
-    }
-  };
 
   const handleClick = (index) => {
     setActive(index);
     activeNavigationName !== name && setActiveNavigation(name);
   };
 
-  useEffect(() => {
-    activeNavigationName === name && setFocus(name, active);
-  }, [active, activeNavigationName]);
-
-  return (
-    <div
-      className={css(styles.root(type, customStyles?.root)._)}
-      data-focus-id={`navigation-${name}`}
-      onKeyDown={handleKeyPress}
-    >
-      {children.map((item, index) => (
+  const content = useMemo(
+    () =>
+      children.map((item, index) => (
         <div
           tabIndex={0}
           data-focus-id={`navigation-${name}-${index}`}
@@ -46,14 +28,66 @@ export const Navigation = memo(({ name, type, children, customStyles }) => {
         >
           {item}
         </div>
-      ))}
+      )),
+    [children, activeNavigationName]
+  );
+  const stepMap = useMemo(() => (chunkLength ? chunk(content, chunkLength) : [content]), [content, chunkLength]);
+
+  const rowIndex = useMemo(
+    () => stepMap.findIndex((arr) => arr.some?.((item) => item.props['data-focus-id'].includes(active))),
+    [stepMap, active]
+  );
+
+  const columnIndex = useMemo(
+    () => stepMap[rowIndex]?.findIndex((item) => item.props['data-focus-id'].includes(active)),
+    [stepMap, rowIndex, active]
+  );
+
+  const handleKeyPress = (e) => {
+    const { key } = e;
+    const [type] = Object.entries(navigationKeys).find(([, arr]) => arr.includes(key)) || [];
+
+    switch (type) {
+      case navigationTypes.vertical: {
+        const newIndex = rowIndex + navigationModificators[key];
+        const isInside = newIndex >= 0 && newIndex < stepMap.length;
+        const component = isInside && stepMap[newIndex][columnIndex];
+        component && setActive(+component.key);
+        isInside && e.stopPropagation();
+        break;
+      }
+      case navigationTypes.horizontal: {
+        const newIndex = columnIndex + navigationModificators[key];
+        const isInside = newIndex >= 0 && newIndex < stepMap[rowIndex].length;
+        const component = isInside && stepMap[rowIndex][newIndex];
+        component && setActive(+component.key);
+        isInside && e.stopPropagation();
+        break;
+      }
+      case navigationTypes.web: {
+        setActive(active + navigationModificators[key]);
+      }
+    }
+  };
+
+  useEffect(() => {
+    activeNavigationName === name && setFocus(name, active);
+  }, [active, activeNavigationName]);
+
+  return (
+    <div
+      className={css(styles.root(chunkLength, customStyles?.root)._)}
+      data-focus-id={`navigation-${name}`}
+      onKeyDown={handleKeyPress}
+    >
+      {content}
     </div>
   );
 });
 
 Navigation.propTypes = {
   name: PropsTypes.string.isRequired,
-  type: PropsTypes.oneOf([navigationTypes.horizontal, navigationTypes.vertical]).isRequired,
+  chunkLength: PropsTypes.number,
   children: PropsTypes.arrayOf(PropsTypes.node),
   customStyles: PropsTypes.object
 };

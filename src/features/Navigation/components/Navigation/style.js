@@ -25,12 +25,29 @@ export const item = (customStyles = {}) =>
     }
   });
 
-export const root = (type, customStyles = {}) =>
+const flowSettings = {
+  flexRow: {
+    display: 'flex'
+  },
+  flexColumn: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  grid: (length) => ({
+    display: 'grid',
+    gridTemplateColumns: `repeat(${length}, 1fr)`
+  })
+};
+
+export const root = (chunkLength, customStyles = {}) =>
   StyleSheet.create({
     _: {
-      display: 'flex',
+      ...(chunkLength > 1
+        ? flowSettings.grid(chunkLength)
+        : chunkLength === 1
+        ? flowSettings.flexColumn
+        : flowSettings.flexRow),
       outline: 'none',
-      ...(navigationTypes.vertical === type ? { flexDirection: 'column' } : {}),
       ...customStyles
     }
   });
