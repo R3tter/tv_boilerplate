@@ -7,7 +7,7 @@ import { setFocus } from 'core/helpers';
 
 import * as styles from './style';
 
-export const Navigation = memo(({ name, type, children }) => {
+export const Navigation = memo(({ name, type, children, customStyles }) => {
   const [active, setActive] = useState(0);
   const { activeNavigationName, setActiveNavigation } = useContext(NavigationContext);
 
@@ -31,14 +31,18 @@ export const Navigation = memo(({ name, type, children }) => {
   }, [active, activeNavigationName]);
 
   return (
-    <div className={css(styles.root(type)._)} data-focus-id={`navigation-${name}`} onKeyDown={handleKeyPress}>
+    <div
+      className={css(styles.root(type, customStyles?.root)._)}
+      data-focus-id={`navigation-${name}`}
+      onKeyDown={handleKeyPress}
+    >
       {children.map((item, index) => (
         <div
           tabIndex={0}
           data-focus-id={`navigation-${name}-${index}`}
           key={index}
           onClick={() => handleClick(index)}
-          className={css(styles.regular.item)}
+          className={css(styles.item(customStyles?.item)._)}
         >
           {item}
         </div>
@@ -50,5 +54,6 @@ export const Navigation = memo(({ name, type, children }) => {
 Navigation.propTypes = {
   name: PropsTypes.string.isRequired,
   type: PropsTypes.oneOf([navigationTypes.horizontal, navigationTypes.vertical]).isRequired,
-  children: PropsTypes.arrayOf(PropsTypes.node)
+  children: PropsTypes.arrayOf(PropsTypes.node),
+  customStyles: PropsTypes.object
 };

@@ -6,11 +6,11 @@ import { navigationTypes, NavigationContext, navigationKeys, navigationModificat
 export const NavigationWrapper = memo(({ children, navigations }) => {
   const { activeNavigationName, setActiveNavigation } = useContext(NavigationContext);
 
-  const columnIndex = useMemo(() => navigations.findIndex((arr) => arr.includes(activeNavigationName)), [
+  const rowIndex = useMemo(() => navigations.findIndex((arr) => arr.includes(activeNavigationName)), [
     activeNavigationName
   ]);
-  const rowIndex = useMemo(() => navigations[columnIndex]?.findIndex((item) => item === activeNavigationName), [
-    columnIndex,
+  const columnIndex = useMemo(() => navigations[rowIndex]?.findIndex((item) => item === activeNavigationName), [
+    rowIndex,
     activeNavigationName
   ]);
 
@@ -19,17 +19,17 @@ export const NavigationWrapper = memo(({ children, navigations }) => {
     const [type] = Object.entries(navigationKeys).find(([, arr]) => arr.includes(key)) || [];
     switch (type) {
       case navigationTypes.vertical: {
-        const newIndex = columnIndex + navigationModificators[key];
+        const newIndex = rowIndex + navigationModificators[key];
         const isValid = newIndex >= 0 && newIndex < navigations.length;
-        const navigationName = isValid && navigations[newIndex][rowIndex];
-        navigationName && setActiveNavigation(navigations[newIndex][rowIndex]);
+        const navigationName = isValid && navigations[newIndex][columnIndex];
+        navigationName && setActiveNavigation(navigations[newIndex][columnIndex]);
         break;
       }
       case navigationTypes.horizontal: {
-        const newIndex = rowIndex + navigationModificators[key];
-        const isValid = newIndex >= 0 && newIndex < navigations[columnIndex].length;
-        const navigationName = isValid && navigations[columnIndex][newIndex];
-        navigationName && setActiveNavigation(navigations[columnIndex][newIndex]);
+        const newIndex = columnIndex + navigationModificators[key];
+        const isValid = newIndex >= 0 && newIndex < navigations[rowIndex].length;
+        const navigationName = isValid && navigations[rowIndex][newIndex];
+        navigationName && setActiveNavigation(navigations[rowIndex][newIndex]);
         break;
       }
     }

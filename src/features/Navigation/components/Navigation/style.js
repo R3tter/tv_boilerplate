@@ -9,30 +9,28 @@ export const regular = StyleSheet.create({
     ':focus': {
       border: '2px solid red'
     }
-  },
-  item: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '150px',
-    height: '50px',
-    outline: 'none',
-    boxShadow: '1px 1px 12px 1px rgba(0,0,0,.1)',
-    transition: 'all .3s ease-in-out',
-    ':not(:first-child)': {
-      marginLeft: '25px'
-    },
-    ':focus': {
-      boxShadow: '1px 1px 12px 5px rgba(0,0,0,.2)'
-    }
   }
 });
 
-export const root = (type) =>
+export const item = (customStyles = {}) =>
+  StyleSheet.create({
+    _: {
+      outline: 'none',
+      boxShadow: '1px 1px 12px 1px rgba(0,0,0,.1)',
+      transition: 'all .3s ease-in-out',
+      ':focus': {
+        boxShadow: '1px 1px 12px 5px rgba(0,0,0,.2)'
+      },
+      ...customStyles
+    }
+  });
+
+export const root = (type, customStyles = {}) =>
   StyleSheet.create({
     _: {
       display: 'flex',
       outline: 'none',
-      ...(navigationTypes.vertical === type ? { flexDirection: 'column' } : {})
+      ...(navigationTypes.vertical === type ? { flexDirection: 'column' } : {}),
+      ...customStyles
     }
   });
