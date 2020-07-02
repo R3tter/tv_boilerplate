@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { css } from 'aphrodite/no-important';
 
 import { Navigation, NavigationWrapper } from 'Navigation';
-import { NavigationContext, navigationTypes, navigationNames } from 'Navigation/constants';
-
-import * as styles from './style';
+import { NavigationContext, navigationNames } from 'Navigation/constants';
 
 export const App = () => {
   const [activeNavigationName, setActiveNavigation] = useState(null);

@@ -1,7 +1,5 @@
 import { StyleSheet } from 'aphrodite/no-important';
 
-import { navigationTypes } from 'Navigation/constants';
-
 export const regular = StyleSheet.create({
   root: {
     display: 'flex',
