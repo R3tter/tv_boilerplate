@@ -7,7 +7,7 @@ import { setFocus, chunk } from 'core/helpers';
 
 import * as styles from './style';
 
-export const Navigation = memo(({ name, chunkLength, children, customStyles }) => {
+export const Navigation = memo(({ name, columnsCount, children, customStyles }) => {
   const [active, setActive] = useState(0);
   const { activeNavigationName, setActiveNavigation } = useContext(NavigationContext);
 
@@ -31,7 +31,7 @@ export const Navigation = memo(({ name, chunkLength, children, customStyles }) =
       )),
     [children, activeNavigationName]
   );
-  const stepMap = useMemo(() => (chunkLength ? chunk(content, chunkLength) : [content]), [content, chunkLength]);
+  const stepMap = useMemo(() => (columnsCount ? chunk(content, columnsCount) : [content]), [content, columnsCount]);
 
   const rowIndex = useMemo(
     () => stepMap.findIndex((arr) => arr.some?.((item) => item.props['data-focus-id'].includes(active))),
@@ -76,7 +76,7 @@ export const Navigation = memo(({ name, chunkLength, children, customStyles }) =
 
   return (
     <div
-      className={css(styles.root(chunkLength, customStyles?.root)._)}
+      className={css(styles.root(columnsCount, customStyles?.root)._)}
       data-focus-id={`navigation-${name}`}
       onKeyDown={handleKeyPress}
     >
@@ -87,7 +87,7 @@ export const Navigation = memo(({ name, chunkLength, children, customStyles }) =
 
 Navigation.propTypes = {
   name: PropsTypes.string.isRequired,
-  chunkLength: PropsTypes.number,
+  columnsCount: PropsTypes.number,
   children: PropsTypes.arrayOf(PropsTypes.node),
   customStyles: PropsTypes.object
 };

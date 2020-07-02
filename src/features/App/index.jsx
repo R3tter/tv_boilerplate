@@ -49,7 +49,7 @@ export const App = () => {
           </Navigation>
           <Navigation
             name={navigationNames.second}
-            chunkLength={3}
+            columnsCount={3}
             customStyles={{
               root: {
                 width: '100%',

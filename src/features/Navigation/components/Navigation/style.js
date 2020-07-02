@@ -39,12 +39,12 @@ const flowSettings = {
   })
 };
 
-export const root = (chunkLength, customStyles = {}) =>
+export const root = (columnsCount, customStyles = {}) =>
   StyleSheet.create({
     _: {
-      ...(chunkLength > 1
-        ? flowSettings.grid(chunkLength)
-        : chunkLength === 1
+      ...(columnsCount > 1
+        ? flowSettings.grid(columnsCount)
+        : columnsCount === 1
         ? flowSettings.flexColumn
         : flowSettings.flexRow),
       outline: 'none',
