@@ -21,13 +21,14 @@ import store from 'store/index';
 ]; */
 
 export const routesMapper = (routes, isAuth = false) =>
+  // eslint-disable-next-line
   routes.map((route, i) => {
     const { pageCategory, path } = route;
-
+    // eslint-disable-next-line
     switch (pageCategory) {
       case 'private':
         return !isAuth ? (
-          <Route key={i} path={path} render={() => <Redirect to="/auth" />} />
+          <Redirect key={i} from={path} to="/signIn" />
         ) : (
           <Route key={i} {...route} component={route.component} />
         );
@@ -35,10 +36,9 @@ export const routesMapper = (routes, isAuth = false) =>
         return !isAuth ? (
           <Route key={i} {...route} component={route.component} />
         ) : (
-          <Route key={i} path={path} render={() => <Redirect to="/cabinet" />} />
+          <Redirect key={i} from={path} to="/cabinet" />
         );
     }
-    return null;
   });
 
 export const generateEventObj = (name, value) => ({
