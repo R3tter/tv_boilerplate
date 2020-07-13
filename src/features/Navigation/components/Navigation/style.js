@@ -10,19 +10,6 @@ export const regular = StyleSheet.create({
   }
 });
 
-export const item = (customStyles = {}) =>
-  StyleSheet.create({
-    _: {
-      outline: 'none',
-      boxShadow: '1px 1px 12px 1px rgba(0,0,0,.1)',
-      transition: 'all .3s ease-in-out',
-      ':focus': {
-        boxShadow: '1px 1px 12px 5px rgba(0,0,0,.2)'
-      },
-      ...customStyles
-    }
-  });
-
 const flowSettings = {
   flexRow: {
     display: 'flex'

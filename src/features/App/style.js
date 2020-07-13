@@ -20,5 +20,19 @@ export const regular = StyleSheet.create({
     ':hover': {
       boxShadow: '2px 0px 32px 0 rgba(0,0,0,.2)'
     }
+  },
+  item: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    minWidth: '150px',
+    height: '50px',
+    boxShadow: '1px 1px 12px 1px rgba(0,0,0,.1)',
+    transition: 'all .3s ease-in-out',
+    outline: 'none',
+    ':focus': {
+      boxShadow: '1px 1px 12px 5px rgba(0,0,0,.2)'
+    }
   }
 });

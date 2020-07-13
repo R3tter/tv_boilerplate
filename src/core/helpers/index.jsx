@@ -50,7 +50,8 @@ export const generateEventObj = (name, value) => ({
 
 export const setFocus = (navigationName, itemId) => {
   const selector = itemId !== undefined ? `${navigationName}-${itemId}` : navigationName;
-  document.querySelector(`[data-focus-id="navigation-${selector}"]`)?.focus();
+  const element = document.querySelector(`[data-focus-id="navigation-${selector}"]`)?.children[0];
+  element?.focus();
 };
 
 export const chunk = (arr, length) =>

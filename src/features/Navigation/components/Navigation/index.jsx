@@ -19,13 +19,7 @@ export const Navigation = memo(({ name, columnsCount, children, customStyles }) 
   const content = useMemo(
     () =>
       children.map((item, index) => (
-        <div
-          tabIndex={0}
-          data-focus-id={`navigation-${name}-${index}`}
-          key={index}
-          onClick={() => handleClick(index)}
-          className={css(styles.item(customStyles?.item)._)}
-        >
+        <div data-focus-id={`navigation-${name}-${index}`} key={index} onClick={() => handleClick(index)}>
           {item}
         </div>
       )),

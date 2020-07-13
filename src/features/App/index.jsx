@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { css } from 'aphrodite/no-important';
 
 import { Navigation, NavigationWrapper } from 'Navigation';
 import { NavigationContext, navigationNames } from 'Navigation/constants';
+
+import * as styles from './style';
 
 export const App = () => {
   const [activeNavigationName, setActiveNavigation] = useState(null);
@@ -23,25 +26,15 @@ export const App = () => {
                 width: '100%',
                 marginTop: '25px',
                 gridGap: '25px'
-              },
-              item: {
-                width: '150px',
-                height: '50px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                background: 'red',
-                marginLeft: '25px',
-                ':focus': {
-                  background: 'green'
-                }
               }
             }}
           >
             {Array(4)
               .fill(null)
               .map((_, index) => (
-                <span>{index}</span>
+                <span tabIndex={0} className={css(styles.regular.item)}>
+                  {index}
+                </span>
               ))}
           </Navigation>
           <Navigation
@@ -52,19 +45,15 @@ export const App = () => {
                 width: '100%',
                 marginTop: '25px',
                 gridGap: '25px'
-              },
-              item: {
-                height: '50px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
               }
             }}
           >
             {Array(16)
               .fill(null)
               .map((_, index) => (
-                <span>{index}</span>
+                <span tabIndex={0} className={css(styles.regular.item)} onClick={() => console.log('here')}>
+                  {index}
+                </span>
               ))}
           </Navigation>
         </div>
